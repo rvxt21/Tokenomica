@@ -1,0 +1,43 @@
+class Operations(){
+
+}
+class Participant(){
+  private var tocenLocked:Int=0;
+  private var tocenAvailable:Int=0;
+
+  def TocenLocked=tocenLocked;
+  def TocenAvailable=tocenAvailable;
+  def PrintInfo(): Unit ={
+    println(tocenLocked,tocenAvailable)
+  }
+
+}
+class User() extends Participant {
+    private var numOfUsers:Int=0;
+    private var coefficientMining:Float=0;
+    private var opportunityToPay:Int=0;
+    def NumOffUsers=numOfUsers;
+    def CoefficientMining=coefficientMining;
+}
+class Teacher() extends Participant {
+    private var coursePrice:Int=0;
+    def CoursePrice=coursePrice;
+}
+class Manager() extends Participant {
+    private var priceWork:Int=0;
+    private var tocensForAdd:Int=0;
+    private var tocensForSalary:Int=0;
+    def PriceWork=priceWork;
+    def TocensForAdd=tocensForAdd;
+    def TocensForSalary=tocensForSalary;
+}
+class Node() extends Participant {
+    private var reserv:Int=0;
+    def Reserv=reserv;
+}
+class Exchange() extends Participant {
+}
+
+var thisMonth:Int=0;
+var lastMonth:Int=36;
+var cReserv:Double=0.2;
