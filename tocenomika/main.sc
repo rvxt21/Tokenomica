@@ -72,14 +72,14 @@ class Manager(PriceWork:Int,TokensForAdd:Int,TokensForSalary:Int,TokenLocked:Int
     println(priceWork,tokensForAdd,tokensForSalary);
   }
 }
-class Node(tokenLocked:Int,tokenAvailable:Int) extends Participant(tokenLocked:Int,tokenAvailable:Int) {
+class Node(Reserv:Int,tokenLocked:Int,tokenAvailable:Int) extends Participant(TokenLocked:Int,TokenAvailable:Int) {
   private var reserv:Int=0;
   def Reserv=reserv;
   def SetReservValue(NewValue:Int):Unit={
     reserv=NewValue;
   }
 }
-class Exchange(tokenLocked:Int,tokenAvailable:Int) extends Participant(tokenLocked:Int,tokenAvailable:Int) {
+class Exchange(TokenLocked:Int,TokenAvailable:Int) extends Participant(TokenLocked:Int,TokenAvailable:Int) {
 }
 
 class Operations(){}
