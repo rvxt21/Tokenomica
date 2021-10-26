@@ -1,39 +1,70 @@
 class Operations(){
 
 }
-class Participant(){
-  private var tocenLocked:Int=0;
-  private var tocenAvailable:Int=0;
+class Participant(a:Int,b:Int){
+  private var tokenLocked:Int=a;
+  private var tokenAvailable:Int=b;
 
-  def TocenLocked=tocenLocked;
-  def TocenAvailable=tocenAvailable;
+  def TokenLocked=tokenLocked;
+  def TokenAvailable=tokenAvailable;
   def PrintInfo(): Unit ={
-    println(tocenLocked,tocenAvailable)
+    println(tokenLocked,tokenAvailable)
+  }
+}
+class User(x:Int,y:Double,z:Int,a:Int,b:Int) extends Participant(a:Int,b:Int) {
+
+  private var numOfUsers:Int=x;
+  private var coefficientMining:Double=y;
+  private var opportunityToPay:Int=z;
+  def NumOffUsers=numOfUsers;
+  def SetNumOfUsers(NewNum:Int):Unit={
+    numOfUsers=NewNum;
+  }
+  def CoefficientMining=coefficientMining;
+  def SetCoefficientOfMining(NewCoefficient:Int):Unit={
+    coefficientMining=NewCoefficient;
+  }
+  def PrintInform(): Unit ={
+    println(numOfUsers,coefficientMining,opportunityToPay,a,b)
+  }
+}
+class Teacher(a:Int,b:Int) extends Participant(a:Int,b:Int) {
+  private var coursePrice:Int=0;
+  def CoursePrice=coursePrice;
+  def NewCoursePrice(newValue:Int):Unit={
+      coursePrice=newValue;
   }
 
+  override def PrintInfo(): Unit = {
+    println("Course price:"+coursePrice);
+  }
 }
-class User() extends Participant {
-    private var numOfUsers:Int=0;
-    private var coefficientMining:Float=0;
-    private var opportunityToPay:Int=0;
-    def NumOffUsers=numOfUsers;
-    def CoefficientMining=coefficientMining;
-}
-class Teacher() extends Participant {
-    private var coursePrice:Int=0;
-    def CoursePrice=coursePrice;
-}
-class Manager() extends Participant {
-    private var priceWork:Int=0;
-    private var tocensForAdd:Int=0;
-    private var tocensForSalary:Int=0;
-    def PriceWork=priceWork;
-    def TocensForAdd=tocensForAdd;
-    def TocensForSalary=tocensForSalary;
+class Manager(a:Int,b:Int) extends Participant(a:Int,b:Int) {
+  private var priceWork:Int=0;
+  private var tokensForAdd:Int=0;
+  private var tokensForSalary:Int=0;
+  def PriceWork=priceWork;
+  def SetPriceWork(NewPriceWork:Int):Unit={
+    priceWork=NewPriceWork;
+  }
+  def TokensForAdd=tokensForAdd;
+  def SetTokensForAdd(AddPrice:Int):Unit={
+    tokensForAdd=AddPrice;
+  }
+  def TokensForSalary=tokensForSalary;
+  def SetTokensForSalary(NewSalary:Int):Unit={
+    tokensForSalary=NewSalary;
+  }
+  def PrintInfoManager():Unit={
+    printl(priceWork,tokensForAdd,tokensForSalary,a,b);
+  }
 }
 class Node() extends Participant {
-    private var reserv:Int=0;
-    def Reserv=reserv;
+  private var reserv:Int=0;
+  def Reserv=reserv;
+  def SetReservValue(NewValue:Int):Unit={
+    reserv=NewValue;
+  }
 }
 class Exchange() extends Participant {
 }
