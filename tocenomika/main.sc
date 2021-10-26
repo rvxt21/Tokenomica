@@ -1,9 +1,9 @@
 import jdk.internal.org.objectweb.asm.util.Printer
 
 import java.net.UnknownServiceException
-class Participant(a:Int,b:Int){
-  private var tokenLocked:Int=a;
-  private var tokenAvailable:Int=b;
+class Participant(TokenLocked:Int,TokenAvailable:Int){
+  private var tokenLocked:Int=TokenLocked;
+  private var tokenAvailable:Int=TokenAvailable;
 
   def TokenLocked=tokenLocked;
   def SetTokenLocked(NewTokenLocked:Int):Unit={
@@ -18,11 +18,11 @@ class Participant(a:Int,b:Int){
     println(tokenLocked,tokenAvailable)
   }
 }
-class User(x:Int,y:Double,z:Int,a:Int,b:Int) extends Participant(a:Int,b:Int) {
+class User(NumOfUsers:Int,CoefficientMining:Double,OpportunityToPay:Int,TokenLocked:Int,TokenAvailable:Int,CoursePrice:Int) extends Participant(TokenLocked:Int,TokenAvailable:Int) {
 
-  private var numOfUsers:Int=x;
-  private var coefficientMining:Double=y;
-  private var opportunityToPay:Int=z;
+  private var numOfUsers:Int=NumOfUsers;
+  private var coefficientMining:Double=CoefficientMining;
+  private var opportunityToPay:Int=OpportunityToPay;
   def NumOffUsers=numOfUsers;
   def SetNumOfUsers(NewNum:Int):Unit={
     numOfUsers=NewNum;
@@ -31,22 +31,27 @@ class User(x:Int,y:Double,z:Int,a:Int,b:Int) extends Participant(a:Int,b:Int) {
   def SetCoefficientOfMining(NewCoefficient:Int):Unit={
     coefficientMining=NewCoefficient;
   }
+  def TokenMinus(b:Int):Unit={
+    TokenAvailable-CoursePrice;
+  }
   def PrintInform(): Unit ={
-    println(numOfUsers,coefficientMining,opportunityToPay,a,b)
+    println(numOfUsers,coefficientMining,opportunityToPay,TokenLocked,TokenAvailable)
   }
 }
-class Teacher(a:Int,b:Int) extends Participant(a:Int,b:Int) {
-  private var coursePrice:Int=0;
+class Teacher(CoursePrice:Int,TokenLocked:Int,TokenAvailable:Int) extends Participant(TokenLocked:Int,TokenAvailable:Int) {
+  private var coursePrice:Int=CoursePrice;
   def CoursePrice=coursePrice;
   def NewCoursePrice(newValue:Int):Unit={
     coursePrice=newValue;
   }
-
+  def TokensPlus(tokenAvailable:Int):Unit={
+    tokenAvailable+coursePrice;
+  }
   override def PrintInfo(): Unit = {
     println("Course price:"+coursePrice);
   }
 }
-class Manager(a:Int,b:Int) extends Participant(a:Int,b:Int) {
+class Manager(PriceWork:Int,TokensForAdd:Int,TokensForSalary:Int,TokenLocked:Int,TokenAvailable:Int) extends Participant(TokenLocked:Int,TokenAvailable:Int) {
   private var priceWork:Int=0;
   private var tokensForAdd:Int=0;
   private var tokensForSalary:Int=0;
@@ -66,14 +71,14 @@ class Manager(a:Int,b:Int) extends Participant(a:Int,b:Int) {
     println(priceWork,tokensForAdd,tokensForSalary);
   }
 }
-class Node(a:Int,b:Int) extends Participant(a:Int,b:Int) {
+class Node(tokenLocked:Int,tokenAvailable:Int) extends Participant(tokenLocked:Int,tokenAvailable:Int) {
   private var reserv:Int=0;
   def Reserv=reserv;
   def SetReservValue(NewValue:Int):Unit={
     reserv=NewValue;
   }
 }
-class Exchange(a:Int,b:Int) extends Participant(a:Int,b:Int) {
+class Exchange(tokenLocked:Int,tokenAvailable:Int) extends Participant(tokenLocked:Int,tokenAvailable:Int) {
 }
 
 class Operations(){}
@@ -91,6 +96,7 @@ def Monthly(monthly:Int,lastMonth:Int):Unit= {
   while(monthly<lastMonth){
     monthly+1;
     println("Monthly:"+monthly)
+
   }
 }
 
