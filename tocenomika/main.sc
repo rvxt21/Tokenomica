@@ -19,10 +19,11 @@ class Participant(TokenLocked:Int,TokenAvailable:Int){
   }
 }
 class User(NumOfUsers:Int,CoefficientMining:Double,OpportunityToPay:Int,TokenLocked:Int,TokenAvailable:Int,CoursePrice:Int) extends Participant(TokenLocked:Int,TokenAvailable:Int) {
-
+  private var coursePrice:Int=CoursePrice;
   private var numOfUsers:Int=NumOfUsers;
   private var coefficientMining:Double=CoefficientMining;
   private var opportunityToPay:Int=OpportunityToPay;
+  def CursePrice=coursePrice;
   def NumOffUsers=numOfUsers;
   def SetNumOfUsers(NewNum:Int):Unit={
     numOfUsers=NewNum;
@@ -86,7 +87,7 @@ class Operations(){}
 
   val ThisMonth:Int=0;
   val LastMonth:Int=36;
-var user1=new User(1,1.1,1,10,5);
+var user1=new User(1,1.1,1,10,5,10);
 var teacher1=new Teacher(10,5);
 def Monthly(monthly:Int,lastMonth:Int):Unit= {
   user1.SetTokenAvailable(5)
@@ -95,8 +96,9 @@ def Monthly(monthly:Int,lastMonth:Int):Unit= {
   teacher1.PrintInfo()
   while(monthly<lastMonth){
     monthly+1;
-    println("Monthly:"+monthly)
-
+    println("Month:"+monthly)
+    user1.TokenMinus(user1.CursePrice)
+    teacher1.TokensPlus(teacher1.CoursePrice)
   }
 }
 
