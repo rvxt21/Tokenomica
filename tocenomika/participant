@@ -1,0 +1,26 @@
+class Participant(TokenAvailable:Int,TokenLocked:Int){
+  private var tokenAvailable:Int=TokenAvailable
+  private var tokenLocked:Int=TokenLocked
+  def SetTokenLocked(newToken:Int):Unit={
+      tokenLocked=newToken
+  }
+  def SetTokenAvailable(newTokenA:Int):Unit={
+      tokenAvailable=newTokenA
+  }
+  def GetTokenLocked():Int={
+    return tokenLocked
+  }
+  def GetTokenAvailable():Int={
+    return tokenAvailable
+  }
+  def PrintInfoParticipant():Unit={
+    println("Token available: "+tokenAvailable+"\nToken locked: "+tokenLocked)
+  }
+}
+
+var obj=new Participant(10,12)
+obj.PrintInfoParticipant()
+obj.SetTokenAvailable(15)
+obj.PrintInfoParticipant()
+obj.SetTokenLocked(7)
+obj.PrintInfoParticipant()

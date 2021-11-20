@@ -1,0 +1,36 @@
+class Manager(PriceWork:Int,TokensForAdd:Int,TokensForSalary:Int,TokenLocked:Int,TokenAvailable:Int) extends Participant(TokenLocked:Int,TokenAvailable:Int) {
+  private var priceWork:Int=PriceWork;
+  private var tokensForAdd:Int=TokensForAdd;
+  private var tokensForSalary:Int=TokensForSalary;
+  private var tokenAvailable:Double=TokenAvailable
+  private var tokenLocked:Int=TokenLocked
+  def SetPriceWork(NewPriceWork:Int):Unit={
+    priceWork=NewPriceWork;
+  }
+  def SetTokensForAdd(AddPrice:Int):Unit={
+    tokensForAdd=AddPrice;
+  }
+  def SetTokensForSalary(NewSalary:Int):Unit={
+    tokensForSalary=NewSalary
+  }
+  def GetTokensForSalary():Unit={
+    return tokensForSalary
+  }
+  def GetTokensForAdd():Unit={
+    return tokensForAdd
+  }
+  def GetPriceWork():Unit={
+    return priceWork
+  }
+  def ThisMonth():Unit={
+    tokenAvailable=tokenAvailable+priceWork-tokensForAdd+tokensForSalary
+    println("This month tokens: "+tokenAvailable+"\n")
+  }
+  def PrintInfoManager():Unit={
+    println("Work price: "+priceWork+"\nTokens for add: "+tokensForAdd+"\nTokens for salary: "+tokensForSalary);
+  }
+}
+var manager1=new Manager(10,3,7,10,10)
+for (i<-0 to 4){
+  manager1.ThisMonth()
+}

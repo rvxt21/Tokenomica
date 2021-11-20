@@ -1,0 +1,38 @@
+class User(TokenLocked:Int,TokenAvailable:Int,CoursePriCe:Int,CoefficientMining:Double,OpportunityToPay:Int) extends Participant(TokenLocked,TokenAvailable){
+  private var coefficientMining:Double=CoefficientMining
+  private var coursepriCe:Int=CoursePriCe
+  private var opportunityToPay:Int=OpportunityToPay
+  private var tokenAvailable:Double=TokenAvailable
+  private var tokenLocked:Int=TokenLocked
+  def SetCoefficientMining(newCoeff:Double):Unit={
+    coefficientMining=newCoeff
+  }
+  def SetCoursePriCe(newPrice:Int):Unit={
+    coursepriCe=newPrice
+  }
+  def SetOpportunityToPay(newValue:Int):Unit={
+    opportunityToPay=newValue
+  }
+  def GetCoefficientMining():Double={
+    return coefficientMining
+  }
+  def GetCoursePriCe():Int= {
+    return coursepriCe
+  }
+  def GetOpportunityToPay():Double={
+    return opportunityToPay
+  }
+  def PrintInfoUser():Unit={
+    println("Token available: "+tokenAvailable+"\nToken locked: "+tokenLocked+"\nCoefficient mining: "+coefficientMining)
+  }
+  def ThisMonth():Unit={
+    tokenAvailable=tokenAvailable-coursepriCe+opportunityToPay*coefficientMining
+    println("This month tokens: "+tokenAvailable)
+  }
+}
+
+var user1=new User(10,12,5,1.1,10)
+var i=0
+for (i<-0 to 3){
+  user1.ThisMonth()
+}

@@ -1,0 +1,30 @@
+class Teacher(TokenLocked:Int,TokenAvailable:Int,CoursePrice:Int,TokensForManager:Int) extends Participant(TokenLocked,TokenAvailable){
+  private var tokenAvailable:Double=TokenAvailable
+  private var tokenLocked:Int=TokenLocked
+  private var coursePrice:Int=CoursePrice
+  private var tokensForManager:Int=TokensForManager
+  def SetCoursePrice(newPrice:Int):Unit={
+    coursePrice=newPrice
+  }
+  def SetTokensForManager(newManager:Int):Unit={
+    tokensForManager=newManager
+  }
+  def GetTokensForManager():Int={
+    return tokensForManager
+  }
+  def GetCoursePrice():Int={
+    return coursePrice
+  }
+  def ThisMonth():Unit={
+    tokenAvailable=tokenAvailable+coursePrice-tokensForManager
+    println("This month tokens: "+tokenAvailable+"\t")
+  }
+  def PrintInfoUser():Unit={
+    println("Token available: "+tokenAvailable+"\nToken locked: "+tokenLocked+"\nCourse price: "+coursePrice+"\n")
+  }
+}
+
+var teacher1=new Teacher(10,10,10,5)
+for (i<-0 to 4){
+  teacher1.ThisMonth()
+}
