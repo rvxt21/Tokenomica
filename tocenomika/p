@@ -1,21 +1,29 @@
-class Operations(){
 
-}
-class Participant(a:Int,b:Int){
-  private var tokenLocked:Int=a;
-  private var tokenAvailable:Int=b;
+class Participant(TokenLocked:Int,TokenAvailable:Int){
+  private var tokenLocked:Int=TokenLocked;
+  private var tokenAvailable:Int=TokenAvailable;
 
   def TokenLocked=tokenLocked;
+  def SetTokenLocked(NewTokenLocked:Int):Unit={
+    tokenLocked=NewTokenLocked;
+  }
   def TokenAvailable=tokenAvailable;
+  def SetTokenAvailable(NewTokenAvailable:Int):Unit={
+    tokenAvailable=NewTokenAvailable;
+  }
   def PrintInfo(): Unit ={
-    println(tokenLocked,tokenAvailable)
+    println("Token locked:"+tokenLocked+"Token available:"+tokenAvailable)
   }
 }
-class User(x:Int,y:Double,z:Int,a:Int,b:Int) extends Participant(a:Int,b:Int) {
-
-  private var numOfUsers:Int=x;
-  private var coefficientMining:Double=y;
-  private var opportunityToPay:Int=z;
+class User(NumOfUsers:Int,CoefficientMining:Double,OpportunityToPay:Int,TokenLocked:Int,TokenAvailable:Int,CoursePrice:Int) extends Participant(TokenLocked:Int,TokenAvailable:Int) {
+  private var coursePrice:Int=CoursePrice;
+  private var numOfUsers:Int=NumOfUsers;
+  private var coefficientMining:Double=CoefficientMining;
+  private var opportunityToPay:Int=OpportunityToPay;
+  private var tokenLocked:Int=TokenLocked;
+  private var tokenAvailable:Int=TokenAvailable;
+  private var thisMonth:Double=0;
+  def CursePrice=coursePrice;
   def NumOffUsers=numOfUsers;
   def SetNumOfUsers(NewNum:Int):Unit={
     numOfUsers=NewNum;
@@ -24,25 +32,38 @@ class User(x:Int,y:Double,z:Int,a:Int,b:Int) extends Participant(a:Int,b:Int) {
   def SetCoefficientOfMining(NewCoefficient:Int):Unit={
     coefficientMining=NewCoefficient;
   }
-  def PrintInform(): Unit ={
-    println(numOfUsers,coefficientMining,opportunityToPay,a,b)
-  }
-}
-class Teacher(a:Int,b:Int) extends Participant(a:Int,b:Int) {
-  private var coursePrice:Int=0;
-  def CoursePrice=coursePrice;
-  def NewCoursePrice(newValue:Int):Unit={
-      coursePrice=newValue;
+  def ThisMonth():Unit={
+    thisMonth=tokenAvailable-coursePrice+coefficientMining*opportunityToPay;
   }
 
-  override def PrintInfo(): Unit = {
+  def PrintInform(): Unit ={
+    println(numOfUsers,coefficientMining,opportunityToPay,TokenLocked,TokenAvailable)
+  }
+}
+class Teacher(CoursePrice:Int,TokenLocked:Int,TokenAvailable:Int,TokensForManager:Int) extends Participant(TokenLocked:Int,TokenAvailable:Int) {
+  private var coursePrice:Int=CoursePrice;
+  private var tokensForManager:Int=TokensForManager;
+  private var tokenLocked:Int=TokenLocked;
+  private var tokenAvailable:Int=TokenAvailable;
+  var thisMonth:Int=0;
+  def GetTokensForManager=tokensForManager;
+  def CoursePrice=coursePrice;
+  def NewCoursePrice(newValue:Int):Unit={
+    coursePrice=newValue;
+  }
+  def ThisMonth():Unit={
+    thisMonth=tokenAvailable+coursePrice-tokensForManager;
+  }
+
+  def PrintInfoT(): Unit = {
     println("Course price:"+coursePrice);
   }
 }
-class Manager(a:Int,b:Int) extends Participant(a:Int,b:Int) {
-  private var priceWork:Int=0;
-  private var tokensForAdd:Int=0;
-  private var tokensForSalary:Int=0;
+class Manager(PriceWork:Int,TokensForAdd:Int,TokensForSalary:Int,TokenLocked:Int,TokenAvailable:Int) extends Participant(TokenLocked:Int,TokenAvailable:Int) {
+  private var priceWork:Int=PriceWork;
+  private var tokensForAdd:Int=TokensForAdd;
+  private var tokensForSalary:Int=TokensForSalary;
+  private var thisMonth:Int=0
   def PriceWork=priceWork;
   def SetPriceWork(NewPriceWork:Int):Unit={
     priceWork=NewPriceWork;
@@ -55,20 +76,43 @@ class Manager(a:Int,b:Int) extends Participant(a:Int,b:Int) {
   def SetTokensForSalary(NewSalary:Int):Unit={
     tokensForSalary=NewSalary;
   }
+  def ThisMonth():Unit={
+    thisMonth=TokenAvailable+priceWork-tokensForAdd+tokensForSalary;
+  }
   def PrintInfoManager():Unit={
-    printl(priceWork,tokensForAdd,tokensForSalary,a,b);
+    println(priceWork,tokensForAdd,tokensForSalary);
   }
 }
-class Node() extends Participant {
+class Node(Reserv:Int,TokenLocked:Int,TokenAvailable:Int) extends Participant(TokenLocked:Int,TokenAvailable:Int) {
   private var reserv:Int=0;
   def Reserv=reserv;
   def SetReservValue(NewValue:Int):Unit={
     reserv=NewValue;
   }
 }
-class Exchange() extends Participant {
+class Exchange(TokenLocked:Int,TokenAvailable:Int) extends Participant(TokenLocked:Int,TokenAvailable:Int) {
 }
 
-var thisMonth:Int=0;
-var lastMonth:Int=36;
-var cReserv:Double=0.2;
+class Operations(){}
+
+
+var user1=new User(1,1.1,1,10,15,10);
+var teacher1=new Teacher(10,5,0,5);
+def Monthly(monthly:Int,lastMonth:Int):Unit= {
+  user1.SetTokenAvailable(5)
+  teacher1.SetTokenAvailable(5)
+  user1.PrintInform()
+  teacher1.PrintInfo()
+  while(monthly<lastMonth){
+    monthly+1;
+    println("Month:"+monthly)
+    user1.ThisMonth();
+    teacher1.ThisMonth();
+    user1.PrintInform();
+    teacher1.PrintInfoT();
+  }
+}
+
+Monthly(1,3);
+
+
